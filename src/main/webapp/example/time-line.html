@@ -15,10 +15,10 @@
   </head>
   <body>
     <script type="text/javascript">
-      NProgress.configure({showSpinner: false, minimum: 0.3})
+      NProgress.configure({showSpinner: false, minimum: 0.3});
       NProgress.start();
     </script>
-    <div c-widget="timeLine; bind:item in items; width:400" class="circular log">
+    <c-timeline bind="item in items" width="400" class="circular log">
       <template name="content"><strong c-bind="item.content.title"></strong>
         <p c-bind="item.content.description"></p>
       </template>
@@ -27,7 +27,7 @@
         <div c-bind="item.time.date" class="date"></div>
         <div c-bind="item.time.time" class="date-time"></div>
       </template>
-    </div>
+    </c-timeline>
   </body>
   <script src="./resources/jquery/jquery-2.1.3.js"></script>
   <script src="./resources/jquery/jquery.cookie.js"></script>

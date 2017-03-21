@@ -16,13 +16,16 @@
   </head>
   <body>
     <script type="text/javascript">
-      NProgress.configure({showSpinner: false, minimum: 0.3})
+      NProgress.configure({showSpinner: false, minimum: 0.3});
       NProgress.start();
     </script>
     <div class="v-box">
       <div class="box ui menu secondary attached page-header">
         <div class="item logo header"><img src="./resources/images/logo.png" class="ui mini image"><span>Cola-UI Client Framework</span></div>
-        <div class="right menu"><a class="item msg icon mail"><i class="icon mail"></i><span class="badge">5</span></a><a class="item msg icon"><i class="icon alarm icon-animated-bell"></i><span class="badge">22</span></a><a c-onclick="showUserSidebar()" class="item icon user"><img src="./resources/images/avatars/alex.png" class="ui image avatar"><i class="icon dropdown"></i></a></div>
+        <div class="right menu"><a class="item msg icon mail">
+          <i class="icon mail"></i><span class="badge">5</span></a><a class="item msg icon"><i class="icon alarm icon-animated-bell"></i><span class="badge">22</span></a>
+          <a c-onclick="showUserSidebar()" class="item icon user"><img src="./resources/images/avatars/alex.png" class="ui image avatar"><i class="icon dropdown"></i></a>
+        </div>
       </div>
       <div class="flex-box">
         <div class="h-box">
@@ -42,29 +45,31 @@
           <div class="flex-box">
             <div id="rightContainer">
               <div class="layer-dimmer"></div>
-              <div id="subMenuLayer" c-widget="Layer; animation:slide right">
-                <div class="title"><span c-bind="currentMenu.label"></span></div>
-                <div id="subMenuTree">
-                  <template name="node-default">
-                    <div><i c-classname="menu.hasChild ? 'icon folder outline' : 'icon file'"></i><span c-bind="menu.label"></span></div>
-                  </template>
+              <div id="subMenuLayer">
+                <div class="v-box">
+                  <div class="title box"><i c-class="currentMenu.icon"></i><span c-bind="currentMenu.label"></span></div>
+                  <div id="subMenuTree" class="flex-box">
+                    <template name="node-default">
+                      <div><i c-classname="menu.icon"></i><span c-bind="menu.label"></span></div>
+                    </template>
+                  </div>
                 </div>
                 <div id="subMenuNavbar" c-onclick="hideSubMenuLayer()">
                   <div><i class="iconfont icon-weibiaoti26"></i></div>
                 </div>
               </div>
-              <div id="viewTab" c-widget="Tab; height:100%">
+              <c-tab id="viewTab" height="100%">
                 <nav class="tab-bar">
                   <ul class="tabs"></ul>
                 </nav>
                 <ul class="contents"></ul>
-              </div>
+              </c-tab>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="userSidebar" c-widget="Sidebar; modalOpacity:0; direction:right">
+    <c-sidebar id="userSidebar" modalOpacity="0" direction="right">
       <div class="v-box">
         <div class="box">
           <div class="ui segment text-center basic inverted basic-info">
@@ -78,28 +83,28 @@
           </div>
         </div>
         <div class="box text-center">
-          <div c-widget="Button; caption:安全退出; click:logout" class="sign-out-btn teal basic"><i class="icon sign out"></i></div>
+          <c-button caption="安全退出" click="logout" class="sign-out-btn teal basic"><i class="icon sign out"></i></c-button>
         </div>
       </div>
-    </div>
+    </c-sidebar>
     <div id="loginDialog">
-      <div id="containerSignIn" c-widget="segment;" class="ui segment">
-        <div id="formSignIn" c-widget="form" class="ui form">
+      <div id="containerSignIn" class="ui segment">
+        <c-form id="formSignIn">
           <h2>用户登录</h2>
           <div class="field">
-            <div c-widget="input; placeholder:用户名; postOnInput:true; bind:login.userName" class="large"></div>
+            <c-input placeholder="用户名" postOnInput="true" bind="login.userName" class="large"></c-input>
           </div>
           <div class="field">
-            <div c-widget="input; placeholder:密码;inputType:password; postOnInput:true; bind:login.password" class="large"></div>
+            <c-input placeholder="密码" inputType="password" postOnInput="true" bind="login.password" class="large"></c-input>
           </div>
           <div style="min-height: 1em;" class="field"><a href="./frame/account/forgot-password" class="float-right">找回密码</a></div>
           <div class="field">
-            <div c-widget="Button; caption:登录; click:signIn" tabindex="0" class="large fluid circular submit-btn"></div>
+            <c-button caption="登录" click="signIn" tabindex="0" class="large fluid circular submit-btn"></c-button>
           </div>
           <div class="field">
             <div class="ui message error"></div>
           </div>
-        </div>
+        </c-form>
       </div>
     </div>
   </body>

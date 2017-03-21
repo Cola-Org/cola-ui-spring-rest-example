@@ -43,3 +43,52 @@ jdbc.driver = com.mysql.jdbc.Driver
 
 http://localhost:port/context
 	
+		
+## Cola 开放数据
+##### Cola-UI 测试与演示平台使用
+   
+提供的接口列表如下
+* /service/company
+
+* /service/company/find/:from/:limit
+
+* /service/company/find?pageSize=5&pageNo=1
+
+* /service/company/:id/depts
+
+* /service/company/:id/employees
+
+* /service/company/:id/find/depts?pageSize=5&pageNo=1
+
+* /service/company/:id/find/employees?pageSize=5&pageNo=1
+
+* /service/dept
+
+* /service/dept/find/:from/:limit
+
+* /service/dept/find?pageSize=5&pageNo=1
+
+* /service/dept/:id/employees
+
+* /service/dept/:id/find/employees?pageSize=5&pageNo=1
+
+* /service/employee
+
+* /service/employee/find/:from/:limit
+
+* /service/employee/find?pageSize=5&pageNo=1
+
+* /service/district/
+
+* /service/district/provinces
+
+* /service/district/children?parentId=2
+
+* /service/district/:id/children
+
+* /service/employee/exists?email=alex.tong007@gmail.com
+
+* /service/dictionary?codes=10011,10012,10013,10014
+
+
+

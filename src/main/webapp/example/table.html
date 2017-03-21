@@ -16,14 +16,16 @@
   </head>
   <body>
     <script type="text/javascript">
-      NProgress.configure({showSpinner: false, minimum: 0.3})
+      NProgress.configure({showSpinner: false, minimum: 0.3});
       NProgress.start();
     </script>
     <div style="height: 100%; " class="ui fragment">
       <div id="productTable">
         <template name="price">
           <div>
-            <div c-widget="input; bind:item.unitPrice; blur:blur" class="mini"></div><span class="btn"><i class="edit icon"></i></span><span c-bind="formatNumber(item.unitPrice, '¥#,##0.00')"></span>
+            <c-input bind="item.unitPrice" blur="blur" class="mini"></c-input>
+            <span class="btn"><i class="edit icon"></i></span>
+            <span c-bind="formatNumber(item.unitPrice, '¥#,##0.00')"></span>
           </div>
         </template>
       </div>

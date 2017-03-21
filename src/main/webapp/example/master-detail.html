@@ -16,14 +16,14 @@
   </head>
   <body>
     <script type="text/javascript">
-      NProgress.configure({showSpinner: false, minimum: 0.3})
+      NProgress.configure({showSpinner: false, minimum: 0.3});
       NProgress.start();
     </script>
     <div class="ui segment">
       <div id="categoryPager" class="secondary">
         <div class="header item">产品分类</div>
         <div class="control item">
-          <div c-widget="button;icon:plus;caption:添加; click:addCategory" class="teal"></div>
+          <c-button icon="plus" caption="添加" click="addCategory" class="teal"></c-button>
         </div>
         <div class="right menu">
           <div page-code="pages" class="item"></div>
@@ -35,7 +35,7 @@
       <div id="productPager" class="secondary">
         <div class="header item">产品列表</div>
         <div class="control item">
-          <div c-widget="button;icon:plus;caption:添加; click:addProduct" class="teal"></div>
+          <c-button icon="plus" caption="添加" click="addProduct" class="teal"></c-button>
         </div>
         <div class="right menu">
           <div page-code="pages" class="item"></div>
@@ -46,7 +46,7 @@
     <div id="categoryLayer" class="content-background">
       <div class="caption-bar"><i class="icon user"></i><span class="caption">产品分类维护</span>
         <div class="tools">
-          <div c-widget="button; caption:返回; click:categoryCancel; icon:angle right; iconPosition:right" class="basic circular"></div>
+          <c-button caption="返回" click="categoryCancel" icon="angle right" iconPosition="right" class="basic circular"></c-button>
         </div>
       </div>
       <div class="ui segment basic">
@@ -54,26 +54,26 @@
           <div class="fields">
             <div class="field three wide">
               <label>Category Name</label>
-              <div c-widget="Input; bind:customCategory.categoryName; "></div>
+              <c-input bind="customCategory.categoryName"></c-input>
             </div>
           </div>
           <div class="fields">
             <div class="field three wide">
               <label>Category Description</label>
-              <textarea c-bind="customCategory.description"></textarea>
+              <c-textarea bind="customCategory.description"></c-textarea>
             </div>
           </div>
         </div>
       </div>
       <div class="ui segment basic">
-        <div c-widget="button; caption:Save; icon:checkmark; click:categorySave" class="big positive circular"></div>
-        <div c-widget="button; caption:Cancel; icon:remove; click:categoryCancel" class="big negative circular"></div>
+        <c-button caption="Save" icon="checkmark" click="categorySave" class="big positive circular"></c-button>
+        <c-button caption="Cancel" icon="remove" click="categoryCancel" class="big negative circular"></c-button>
       </div>
     </div>
     <div id="productLayer" class="content-background">
       <div class="caption-bar"><i class="icon user"></i><span class="caption">产品信息维护</span>
         <div class="tools">
-          <div c-widget="button; caption:返回; click:productCancel; icon:angle right; iconPosition:right" class="basic circular"></div>
+          <c-button caption="返回" click="productCancel" icon="angle right" iconPosition="right" class="basic circular"></c-button>
         </div>
       </div>
       <div class="ui segment basic">
@@ -87,11 +87,11 @@
                   <div class="fields">
                     <div class="field three wide">
                       <label>Category ID</label>
-                      <div c-widget="Input; bind:categorys.id; readOnly:true"></div>
+                      <c-input bind="categorys.id" readOnly="true"></c-input>
                     </div>
                     <div class="field three wide">
                       <label>Category Name</label>
-                      <div c-widget="Input; bind:categorys.categoryName;readOnly:true"></div>
+                      <c-input bind="categorys.categoryName" readOnly="true"></c-input>
                     </div>
                   </div>
                 </div>
@@ -105,13 +105,13 @@
                   <div class="fields">
                     <div class="field three wide">
                       <label>Product Name</label>
-                      <div c-widget="Input; bind:customProduct.productName;"></div>
+                      <c-input bind="customProduct.productName"></c-input>
                     </div>
                   </div>
                   <div class="fields">
                     <div class="field three wide">
                       <label>quantityPerUnit</label>
-                      <div c-widget="Input; bind:customProduct.quantityPerUnit;"></div>
+                      <c-input bind="customProduct.quantityPerUnit"></c-input>
                     </div>
                   </div>
                 </div>
@@ -125,15 +125,15 @@
                   <div class="fields">
                     <div class="field three wide">
                       <label>Unit Price</label>
-                      <div c-widget="Input; bind:customProduct.unitPrice;"></div>
+                      <c-input bind="customProduct.unitPrice"></c-input>
                     </div>
                     <div class="field three wide">
                       <label>Units In Stock</label>
-                      <div c-widget="Input; bind:customProduct.unitsInStock;"></div>
+                      <c-input bind="customProduct.unitsInStock"></c-input>
                     </div>
                     <div class="field three wide">
                       <label>Units On Order</label>
-                      <div c-widget="Input; bind:customProduct.unitsOnOrder;"></div>
+                      <c-input bind="customProduct.unitsOnOrder"></c-input>
                     </div>
                   </div>
                 </div>
@@ -143,8 +143,8 @@
         </div>
       </div>
       <div class="ui segment basic">
-        <div c-widget="button; caption:Save; icon:checkmark; click:productSave" class="big positive circular"></div>
-        <div c-widget="button; caption:Cancel; icon:remove; click:productCancel" class="big negative circular"></div>
+        <c-button caption="Save" icon="checkmark" click="productSave" class="big positive circular"></c-button>
+        <c-button caption="Cancel" icon="remove" click="productCancel" class="big negative circular"></c-button>
       </div>
     </div>
   </body>

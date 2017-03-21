@@ -14,49 +14,44 @@ import com.colaui.example.model.Product;
 import com.colaui.example.service.ProductService;
 import com.colaui.provider.Page;
 
-@Service("productService")
-@Transactional
+@Service
 public class ProductServiceImpl implements ProductService {
-	@Autowired
-	private ProductDao productDao;
+    @Autowired
+    private ProductDao productDao;
 
-	@Override
-	public Product find(long id) {
-		// TODO Auto-generated method stub
-		return productDao.get(id);
-	}
+    @Override
+    public Product find(long id) {
+        return productDao.get(id);
+    }
 
-	@Override
-	public void save(Product product) {
-		productDao.save(product);
+    @Override
+    public void save(Product product) {
+        productDao.save(product);
+    }
 
-	}
+    @Override
+    public void update(Product product) {
+        productDao.update(product);
+    }
 
-	@Override
-	public void update(Product product) {
-		productDao.update(product);
+    @Override
+    public void delete(long id) {
+        productDao.delete(id);
+    }
 
-	}
+    @Override
+    public List<Product> find(int from, int limit) {
 
-	@Override
-	public void delete(long id) {
+        return productDao.find(from, limit);
+    }
 
-	}
-
-	@Override
-	public List<Product> find(int from, int limit) {
-
-		return productDao.find(from, limit);
-	}
-
-	@Override
-	public Page<Product> queryOfCategoryId(int pageSize, int pageNo,
-			long categoryId) {
-		Criteria criteria = productDao.createCriteria();
-		Criterion lastRest = Restrictions.eq("categoryId", categoryId);
-		criteria.add(lastRest);
-
-		return productDao.getPage(pageSize, pageNo, criteria);
-	}
+    @Override
+    public Page<Product> queryOfCategoryId(int pageSize, int pageNo,
+                                           long categoryId) {
+        Criteria criteria = productDao.createCriteria();
+        Criterion lastRest = Restrictions.eq("categoryId", categoryId);
+        criteria.add(lastRest);
+        return productDao.getPage(pageSize, pageNo, criteria);
+    }
 
 }

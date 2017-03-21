@@ -19,37 +19,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("cola")
 public class LoadHtmlController {
 
-	private static String[] removeTagNames = "script,link".split(",");
-	@Autowired
-	private ServletContext context;
+    private static String[] removeTagNames = "script,link".split(",");
+    @Autowired
+    private ServletContext context;
 
-	public void setContext(ServletContext context) {
-		this.context = context;
-	}
+    public void setContext(ServletContext context) {
+        this.context = context;
+    }
 
-	@RequestMapping(value = "/load/html/body", method = RequestMethod.GET, produces = "text/plain; charset=utf-8")
-	public @ResponseBody
-	String loadBody() {
-		String filePath = context.getRealPath("cases" + File.separator
-				+ "case1.html");
+    @RequestMapping(value = "/load/html/body", method = RequestMethod.GET, produces = "text/plain; charset=utf-8")
+    @ResponseBody
+    public String loadBody() {
+        String filePath = context.getRealPath("cases" + File.separator + "case1.html");
+        File file = new File(filePath);
+        Document document;
+        try {
+            document = Jsoup.parse(file, "utf-8");
+            for (String tagName : removeTagNames) {
+                Elements scripts = document.select(tagName);
+                for (Element script : scripts) {
+                    script.remove();
+                }
+            }
+            return document.body().html();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
-		File file = new File(filePath);
-		Document document;
-		try {
-			document = Jsoup.parse(file, "utf-8");
-
-			for (String tagName : removeTagNames) {
-				Elements scripts = document.select(tagName);
-				for (Element script : scripts) {
-					script.remove();
-				}
-			}
-			return document.body().html();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-
-	}
+    }
 
 }

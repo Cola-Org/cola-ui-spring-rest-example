@@ -3,206 +3,225 @@ package com.colaui.example.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "EMPLOYEES")
-@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer" })
+@Table(name = "EMPLOYEE")
+@JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer"})
 public class Employee implements Serializable {
-	private static final long serialVersionUID = 7521258772293356125L;
+    private static final long serialVersionUID = 7521258772293356125L;
 
-	private long id;
-	private String lastName;
-	private String firstName;
-	private String title;
-	private String titleOfCourtesy;
-	private Boolean sex;
-	private Date birthDate;
-	private Date hireDate;
-	private String address;
-	private String city;
-	private String region;
-	private String postalCode;
-	private String country;
-	private String phone;
-	private String extension;
-	private String notes;
-	private Employee reportsTo;
-	private Long reportsToId;
-	private String photoPath;
+    private Integer id;
+    private String email;
+    private String name;
+    private Integer age;
+    private Date birthday;
+    private boolean gender;
+    private String website;
+    private String degree;
+    private String avatar;
+    private Integer salary;
+    private boolean married;
+    private String resume;
+    private String cartType;
+    private String cardNumber;
+    private Integer companyId;
+    private Integer deptId;
+    private Date createdAt;
+    private Date updatedAt;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID")
-	public long getId() {
-		return id;
-	}
+    private Company company;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    public Integer getId() {
+        return id;
+    }
 
-	@Column(name = "LAST_NAME")
-	public String getLastName() {
-		return lastName;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
-	@Column(name = "FIRST_NAME")
-	public String getFirstName() {
-		return firstName;
-	}
+    
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Column(name = "TITLE_OF_COURTESY")
-	public String getTitleOfCourtesy() {
-		return titleOfCourtesy;
-	}
+    
+    @Column(name = "age")
+    public Integer getAge() {
+        return age;
+    }
 
-	public void setTitleOfCourtesy(String titleOfCourtesy) {
-		this.titleOfCourtesy = titleOfCourtesy;
-	}
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-	public Boolean getSex() {
-		return sex;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "birthday")
+    public Date getBirthday() {
+        return birthday;
+    }
 
-	public void setSex(Boolean sex) {
-		this.sex = sex;
-	}
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+    
+    @Column(name = "website")
+    public String getWebsite() {
+        return website;
+    }
 
-	@Column(name = "BIRTH_DATE")
-	public Date getBirthDate() {
-		return birthDate;
-	}
+    public void setWebsite(String website) {
+        this.website = website;
+    }
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
+    
+    @Column(name = "degree")
+    public String getDegree() {
+        return degree;
+    }
 
-	@Column(name = "HIRE_DATE")
-	public Date getHireDate() {
-		return hireDate;
-	}
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
 
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
-	}
+    
+    @Column(name = "avatar")
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    
+    @Column(name = "salary")
+    public Integer getSalary() {
+        return salary;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    
+    @Column(name = "resume")
+    public String getResume() {
+        return resume;
+    }
 
-	public String getRegion() {
-		return region;
-	}
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
 
-	public void setRegion(String region) {
-		this.region = region;
-	}
+    
+    @Column(name = "cartType")
+    public String getCartType() {
+        return cartType;
+    }
 
-	@Column(name = "POSTAL_CODE")
-	public String getPostalCode() {
-		return postalCode;
-	}
+    public void setCartType(String cartType) {
+        this.cartType = cartType;
+    }
 
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
+    
+    @Column(name = "cardNumber")
+    public String getCardNumber() {
+        return cardNumber;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    
+    @Column(name = "companyId")
+    public Integer getCompanyId() {
+        return companyId;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    
+    @Column(name = "deptId")
+    public Integer getDeptId() {
+        return deptId;
+    }
 
-	public String getExtension() {
-		return extension;
-	}
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
 
-	public void setExtension(String extension) {
-		this.extension = extension;
-	}
-	@Column(name = "NOTES")
-	public String getNotes() {
-		return notes;
-	}
+    @Temporal(TemporalType.DATE)
+    @Column(name = "createdAt")
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "REPORTS_TO", insertable = false, updatable = false)
-	public Employee getReportsTo() {
-		return reportsTo;
-	}
+    @Temporal(TemporalType.DATE)
+    @Column(name = "updatedAt")
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
 
-	public void setReportsTo(Employee reportsTo) {
-		this.reportsTo = reportsTo;
-	}
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
-	@Column(name = "REPORTS_TO")
-	public Long getReportsToId() {
-		return reportsToId;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId", insertable = false, updatable = false)
+    @JsonIgnore
+    public Company getCompany() {
+        return company;
+    }
 
-	public void setReportsToId(Long reportsToId) {
-		this.reportsToId = reportsToId;
-	}
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
-	@Column(name = "PHOTO_PATH" )
-	public String getPhotoPath() {
-		return photoPath;
-	}
+    @Column(name = "gender")
+    public boolean isGender() {
+        return gender;
+    }
 
-	public void setPhotoPath(String photoPath) {
-		this.photoPath = photoPath;
-	}
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    @Column(name = "married")
+    public boolean isMarried() {
+        return married;
+    }
+
+    public void setMarried(boolean married) {
+        this.married = married;
+    }
 }
