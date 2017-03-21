@@ -1,9 +1,9 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
@@ -13,63 +13,62 @@
        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd  http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-	<context:property-placeholder location="classpath*:/configure.properties" />
-	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-	</bean>
+    <context:property-placeholder location="classpath*:/configure.properties"/>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+    <context:component-scan base-package="com.colaui.example"/>
+    <mvc:annotation-driven/>
 
-		<property name="hibernateProperties">
-			<value>
-				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-				hibernate.hbm2ddl.auto=update
-				hibernate.show_sql=true
-				hibernate.format_sql=true
-				hibernate.cache.use_second_level_cache=false
-				hibernate.cache.use_query_cache=false
-				hibernate.jdbc.fetch_size=50
-				hibernate.jdbc.batch_size=50
-				hibernate.connection.autocommit=true
-				hibernate.connection.release_mode=auto
-				hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
-				javax.persistence.validation.mode=none
-			</value>
-		</property>
-		<property name="packagesToScan" value="com.colaui.example.model" />
-	</bean>
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<bean
-		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-	<context:component-scan base-package="com.colaui.example" />
-  	<tx:annotation-driven transaction-manager="transactionManager" />
-	<tx:advice id="colauiAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="create*" propagation="REQUIRED" />
-			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="remove*" propagation="REQUIRED" />
-			<tx:method name="del*" propagation="REQUIRED" />
-			<tx:method name="*" propagation="NOT_SUPPORTED" read-only="true" />
-		</tx:attributes>
-	</tx:advice>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
 
-	<aop:config>
-		<aop:pointcut id="serviceOperation"
-			expression="execution(* colaui.*.service.*Service.*(..))" />
-		<aop:advisor advice-ref="colauiAdvice" pointcut-ref="serviceOperation" />
-	</aop:config>
-	<context:component-scan base-package="com.colaui" />
-	<mvc:annotation-driven />
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.MySQLDialect
+                hibernate.hbm2ddl.auto=update
+                hibernate.show_sql=true
+                hibernate.format_sql=true
+                hibernate.cache.use_second_level_cache=false
+                hibernate.cache.use_query_cache=false
+                hibernate.jdbc.fetch_size=50
+                hibernate.jdbc.batch_size=50
+                hibernate.connection.autocommit=true
+                hibernate.connection.release_mode=auto
+                hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
+                javax.persistence.validation.mode=none
+            </value>
+        </property>
+        <property name="packagesToScan" value="com.colaui.example.model"/>
+    </bean>
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:advice id="colauiAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="serviceOperation"
+                      expression="execution(* com.colaui.*.service.*Service.*(..))"/>
+        <aop:advisor advice-ref="colauiAdvice" pointcut-ref="serviceOperation"/>
+    </aop:config>
 </beans>

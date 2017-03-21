@@ -19,41 +19,36 @@ import com.colaui.example.model.User;
 
 @RestController
 public class FrameController {
-	@Autowired
-	private MenuDao menuDao;
+    @Autowired
+    private MenuDao menuDao;
 
-	public void setMenuDao(MenuDao menuDao) {
-		this.menuDao = menuDao;
-	}
+    @RequestMapping(value = "/menus", method = RequestMethod.GET)
+    public Collection<Menu> menus() {
+        Criteria criteria = menuDao.createCriteria();
+        Criterion lastRest = Restrictions.isNull("parent");
+        criteria.add(lastRest);
+        return menuDao.find(criteria);
+    }
 
-	@RequestMapping(value = "/menus", method = RequestMethod.GET)
-	public Collection<Menu> menus() {
-		Criteria criteria = menuDao.createCriteria();
-		Criterion lastRest = Restrictions.isNull("parent");
-		criteria.add(lastRest);
-		return menuDao.find(criteria);
-	}
+    @RequestMapping("message/pull")
+    public List<Message> pull() {
+        List<Message> messages = new ArrayList<Message>();
+        Message message = new Message();
+        message.setContent("20");
+        message.setType("message");
+        messages.add(message);
 
-	@RequestMapping("message/pull")
-	public List<Message> pull() {
-		List<Message> messages = new ArrayList<>();
-		Message message = new Message();
-		message.setContent("20");
-		message.setType("message");
-		messages.add(message);
+        message = new Message();
+        message.setContent("26");
+        message.setType("task");
+        messages.add(message);
+        return messages;
+    }
 
-		message = new Message();
-		message.setContent("26");
-		message.setType("task");
-		messages.add(message);
-		return messages;
-	}
-
-	@RequestMapping("user/detail")
-	public User userDetail() {
-
-		User user = new User();
-		user.setAvatar("./resources/images/avatars/alex.png");
-		return user;
-	}
+    @RequestMapping("user/detail")
+    public User userDetail() {
+        User user = new User();
+        user.setAvatar("./resources/images/avatars/alex.png");
+        return user;
+    }
 }

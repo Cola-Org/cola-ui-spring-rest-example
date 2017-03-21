@@ -41,7 +41,7 @@ public class CriteriaHelper {
 	private static Method Mehtod_OrderEntry_getCriteria;
 	private static Method Method_OrderEntry_getOrder;
 	
-	private org.hibernate.Criteria criteriaImpl;
+	private Criteria criteriaImpl;
 	private Map<String, String> aliasMap;
 	
 	public CriteriaHelper(DetachedCriteria detachedCriteria) {
@@ -52,11 +52,11 @@ public class CriteriaHelper {
 		}
 	}
 	
-	public CriteriaHelper(org.hibernate.Criteria criteria) {
+	public CriteriaHelper(Criteria criteria) {
 		this.criteriaImpl = criteria;
 	}
 	
-	public void makeCount(org.hibernate.Criteria entityCriteria) throws Exception {
+	public void makeCount(Criteria entityCriteria) throws Exception {
 		//查询记录条数
 		Object countCriteria = entityCriteria;
 		if (Method_iterateOrderings == null) {
@@ -177,7 +177,7 @@ public class CriteriaHelper {
 				Mehtod_OrderEntry_getCriteria = orderEntry.getClass().getMethod("getCriteria");
 			}
 			
-			org.hibernate.Criteria orderCriteria = (org.hibernate.Criteria)Mehtod_OrderEntry_getCriteria.invoke(orderEntry);
+			Criteria orderCriteria = (Criteria)Mehtod_OrderEntry_getCriteria.invoke(orderEntry);
 			if (criteriaImpl.equals(orderCriteria)) {
 				if (Method_OrderEntry_getOrder == null) {
 					Method_OrderEntry_getOrder = orderEntry.getClass().getDeclaredMethod("getOrder");
@@ -254,7 +254,7 @@ public class CriteriaHelper {
 	
 	public void makeCount() throws Exception {
 		//查询记录条数
-		org.hibernate.Criteria countCriteria = criteriaImpl;
+		Criteria countCriteria = criteriaImpl;
 		if (Method_iterateOrderings == null) {
 			Method_iterateOrderings = countCriteria.getClass().getMethod("iterateOrderings");
 		}
@@ -273,7 +273,7 @@ public class CriteriaHelper {
 		this.clearFirstResult(countCriteria);
 	}
 	
-	public org.hibernate.Criteria getCriteria() {
+	public Criteria getCriteria() {
 		return this.criteriaImpl;
 	}
 	
@@ -315,14 +315,14 @@ public class CriteriaHelper {
 		return (String)Field_Order_propertyName.get(order);
 	}
 	
-	private org.hibernate.Criteria getCriteriaImpl(DetachedCriteria detachedCriteria) throws Exception {
+	private Criteria getCriteriaImpl(DetachedCriteria detachedCriteria) throws Exception {
 		if (DetachedCriteria_impl == null) {
 			Field f = DetachedCriteria.class.getDeclaredField("impl");
 			f.setAccessible(true);
 			DetachedCriteria_impl = f;
 		}
 		
-		return (org.hibernate.Criteria)DetachedCriteria_impl.get(detachedCriteria);
+		return (Criteria)DetachedCriteria_impl.get(detachedCriteria);
 	}
 	
 }

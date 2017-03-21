@@ -1,5 +1,6 @@
 package com.colaui.example.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -15,10 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "MENUS")
-public class Menu {
+@Table(name = "MENU")
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer" })
+public class Menu implements Serializable{
 	private long id;
 	private String icon;
 	private String label;

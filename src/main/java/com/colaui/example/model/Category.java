@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "CATEGORIES")
+@Table(name = "CATEGORY")
 @JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer" })
 public class Category implements Serializable {
 	private static final long serialVersionUID = 6076304611179489256L;

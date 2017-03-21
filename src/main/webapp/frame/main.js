@@ -114,9 +114,22 @@
             recursive: true,
             expression: "menu in menu.menus"
           }
+        },
+        itemClick: function(self, arg) {
+          var data, menus;
+          data = arg.item.get("data").toJSON();
+          menus = data.menus;
+          if (menus && menus.length > 0) {
+            return;
+          } else {
+            App.open(data.path, data);
+            cola.widget("subMenuLayer").hide();
+          }
         }
       },
       subMenuLayer: {
+        $type: "Layer",
+        animation: "slide right",
         beforeShow: function() {
           return $("#viewTab").parent().addClass("lock");
         },
